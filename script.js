@@ -1,31 +1,41 @@
 $(document).ready(function(){
 
 var boxesColors = [];
+var randomBox = -1;
+
+
 for (var i = 0; i < 4; i++) {
 
   boxesColors.push(getRandomColor());
-  $('body').append('<div class="box"></div>');
+  $('body').append('<div class="box" id="box'+i+'"></div>');
+
+  $('#box'+i).each(function(){
+    this.style.backgroundColor= 'rgb(' + boxesColors[i].toString()+')'
+  });
 }
-$('div').each(function(){
-  this.style.color= 'rgb(' + getRandomColor().toString()+')'
-});
+
+randomBox = selectRandomBox(boxesColors.length);
 
 
-$('body').append('<p>',boxesColors[1].toString(),'</p>');
+$('body').append('<p>',boxesColors[randomBox].toString(),'</p>');
 
 $('.box').on('click', function(){
-  $(this).css({'background-color':'rgb(' +boxesColors[1].toString()+')'})
 
-    if (true){
+
+    if ($(this).attr('id') === "box"+ randomBox){
       $('#message').text('Correct!')
     }
     else {
       $('#message').text('Incorrect!')
     }
 
+    console.log($(this).attr('id'));
+
 });
 
-
+for (var i = 0; i < boxesColors.length; i++) {
+  console.log(boxesColors);
+}
 
 
 });
@@ -36,4 +46,8 @@ function getRandomColor () {
     color.push(parseInt(Math.random()*255));
   }
   return color;
+}
+
+function selectRandomBox(len){
+  return Math.floor(Math.random() * len);
 }
