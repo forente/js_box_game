@@ -1,10 +1,11 @@
 $(document).ready(function(){
 
+var boxNumber = 5;
 var boxesColors = [];
 var randomBox = -1;
 
 
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < boxNumber; i++) {
 
   boxesColors.push(getRandomColor());
   $('body').append('<div class="box" id="box'+i+'"></div>');
